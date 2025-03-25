@@ -1,6 +1,6 @@
 import pytest
 
-from remove_elements import Solution
+from merda import Solution
 
 def test_remove_element():
     pytest.fail()
