@@ -21,6 +21,8 @@ if [ -f "$VERSION_FILE" ]; then
     # Write the new version back to the file
     echo "$NEW_VERSION" > "$VERSION_FILE"
     echo "Updated version to $NEW_VERSION"
+
+    git add $VERSION_FILE
 else
     echo "VERSION file not found. Skipping version update."
 fi
