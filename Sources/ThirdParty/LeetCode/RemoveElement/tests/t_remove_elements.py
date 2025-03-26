@@ -1,6 +1,5 @@
 from remove_elements.remove_elements import Solution
 
-
 def test_remove_element():
     s = Solution()
 

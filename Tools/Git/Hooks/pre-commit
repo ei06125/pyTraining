@@ -1,31 +1,26 @@
 #!/bin/sh
 
 echo "Running pre-commit hook..."
-echo "$(pwd)"
 
-# # Load environment variables
-# if [ -f ../../../../.env ]; then
-#     export $(grep -v '^#' ../../../../.env | xargs)
-# else
-#     echo ".env file not found. Exiting."
-#     exit 1
-# fi
+ROOT_DIR=$(pwd)
+VERSION_FILE=$ROOT_DIR/VERSION
 
-# VERSION_FILE="$ROOT_DIR/VERSION"
+echo "VERSION_FILE: $VERSION_FILE"
+echo "VERSION_FILE_REALPATH: $(realpath $VERSION_FILE)"
 
-# if [ -f "$VERSION_FILE" ]; then
-#     # Read the current version
-#     VERSION=$(cat "$VERSION_FILE")
+if [ -f "$VERSION_FILE" ]; then
+    # Read the current version
+    VERSION=$(cat "$VERSION_FILE")
     
-#     # Increment the last number (build/tweak)
-#     IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
-#     LAST_INDEX=$((${#VERSION_PARTS[@]} - 1))
-#     VERSION_PARTS[$LAST_INDEX]=$((VERSION_PARTS[$LAST_INDEX] + 1))
-#     NEW_VERSION=$(IFS='.'; echo "${VERSION_PARTS[*]}")
+    # Increment the last number (build/tweak)
+    IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+    LAST_INDEX=$((${#VERSION_PARTS[@]} - 1))
+    VERSION_PARTS[$LAST_INDEX]=$((VERSION_PARTS[$LAST_INDEX] + 1))
+    NEW_VERSION=$(IFS='.'; echo "${VERSION_PARTS[*]}")
     
-#     # Write the new version back to the file
-#     echo "$NEW_VERSION" > "$VERSION_FILE"
-#     echo "Updated version to $NEW_VERSION"
-# else
-#     echo "VERSION file not found. Skipping version update."
-# fi
+    # Write the new version back to the file
+    echo "$NEW_VERSION" > "$VERSION_FILE"
+    echo "Updated version to $NEW_VERSION"
+else
+    echo "VERSION file not found. Skipping version update."
+fi
