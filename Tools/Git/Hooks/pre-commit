@@ -2,19 +2,23 @@
 
 echo "Running pre-commit hook..."
 
-ROOT_DIR=$(pwd)
-VERSION_FILE=$ROOT_DIR/VERSION
+readonly ROOT_DIR=$(pwd)
+readonly VERSION_FILE=$ROOT_DIR/VERSION
+readonly DATE_FORMAT="+%Y%m%d%H%M%S" # format for BUILD component
+
+# Get current datetime
+current_datetime=$(date $DATE_FORMAT)
 
 if [ -f "$VERSION_FILE" ]; then
     # Read the current version
     VERSION=$(cat "$VERSION_FILE")
-    
+
     # Increment the last number (build/tweak)
     IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
     LAST_INDEX=$((${#VERSION_PARTS[@]} - 1))
-    VERSION_PARTS[$LAST_INDEX]=$((VERSION_PARTS[$LAST_INDEX] + 1))
+    VERSION_PARTS[$LAST_INDEX]=$current_datetime
     NEW_VERSION=$(IFS='.'; echo "${VERSION_PARTS[*]}")
-    
+
     # Write the new version back to the file
     echo "$NEW_VERSION" > "$VERSION_FILE"
     echo "Updated version to $NEW_VERSION"
