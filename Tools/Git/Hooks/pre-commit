@@ -5,9 +5,6 @@ echo "Running pre-commit hook..."
 ROOT_DIR=$(pwd)
 VERSION_FILE=$ROOT_DIR/VERSION
 
-echo "VERSION_FILE: $VERSION_FILE"
-echo "VERSION_FILE_REALPATH: $(realpath $VERSION_FILE)"
-
 if [ -f "$VERSION_FILE" ]; then
     # Read the current version
     VERSION=$(cat "$VERSION_FILE")
