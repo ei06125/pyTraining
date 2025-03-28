@@ -13,6 +13,8 @@ source </PATH/TO/INSTALL/DIR>/bin/activate
 # example source DotFiles/.pyvenv/bin/activate
 ```
 
+Or use your Code Editor to create one for you.
+
 ### Test Requirements
 
 #### pytest
@@ -20,14 +22,19 @@ source </PATH/TO/INSTALL/DIR>/bin/activate
 To install, run:
 
 ```bash
+# to install pytest
 python -m pip install pytest
-```
-
-or
-
-```bash
+# to install the dependencies
 python -m pip install -r requirements.txt
 ```
+
+### PYTHONPATH
+
+In order to import modules from within the `modules/` folder next to the `tests/` folders,
+we use `direnv` and its `envrc` file to load into `PYTHONPATH` the value of `pwd`.
+That way, you only need to run `pytest` to run your tests and `python` should be able to import all your modules.
+
+For more information about `direnv`, check its official page in the references.
 
 ## Version
 
@@ -58,3 +65,7 @@ and now, you are only tweaking a default value between 10 and 15 - that is a TWE
 
 The TWEAK component of the VERSION is incremented with every commit by the pre-commit hook.
 This means that a MAJOR, MINOR or PATCH update will probably start always on X.Y.Z.1.
+
+## References
+
+- <https://direnv.net/>

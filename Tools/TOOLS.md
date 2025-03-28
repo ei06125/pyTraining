@@ -2,11 +2,10 @@
 
 This folder contains programs to help manage the repository.
 
-## Virtualization
+## Versioning
 
-In order to be able to build and run this project's source code in any environment,
- we use `docker` to containarize applications.
+We use `git` to manage the repository source code.
 
-### About Docker
+### About Git
 
-## References
+TBD
